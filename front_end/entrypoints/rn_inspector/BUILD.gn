@@ -28,6 +28,7 @@ devtools_entrypoint("entrypoint") {
     "../../panels/mobile_throttling:meta",
     "../../panels/network:meta",
     "../../panels/performance_monitor:meta",
+    "../../panels/react_devtools:meta",
     "../../panels/recorder:meta",
     "../../panels/rn_welcome:meta-legacy",
     "../../panels/security:meta",
