@@ -128,6 +128,7 @@ export class RNWelcomeImpl extends UI.Widget.VBox implements
             <h1 class="rn-welcome-title">
               ${debuggerBrandName()}
             </h1>
+            <h2>hello???</h2>
             ${showBetaLabel ? html`
               <div class="rn-welcome-title-accessory">
                 ${i18nString(UIStrings.betaLabel)}
