@@ -20,7 +20,7 @@ const UIStrings = {
   /** @description Tech Preview label */
   techPreviewLabel: 'Tech Preview',
   /** @description Welcome text */
-  welcomeMessage: 'Exact copy test',
+  welcomeMessage: 'Welcome to debugging in React Native',
   /** @description "Debugging docs" link */
   docsLabel: 'Debugging docs',
   /** @description "What's new" link */
@@ -128,7 +128,6 @@ export class RNWelcomeImpl extends UI.Widget.VBox implements
             <h1 class="rn-welcome-title">
               ${debuggerBrandName()}
             </h1>
-            <h2>hello???</h2>
             ${showBetaLabel ? html`
               <div class="rn-welcome-title-accessory">
                 ${i18nString(UIStrings.betaLabel)}
