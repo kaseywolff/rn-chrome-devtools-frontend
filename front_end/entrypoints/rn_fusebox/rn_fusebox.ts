@@ -227,7 +227,7 @@ UI.Toolbar.registerToolbarItem({
 class FuseboxReactNativeApplicationObserver implements
     SDK.TargetManager.SDKModelObserver<SDK.ReactNativeApplicationModel.ReactNativeApplicationModel> {
   constructor(targetManager: SDK.TargetManager.TargetManager) {
-    console.log('rn_fusebox.ts: FuseboxReactNativeApplicationObserver: constructor')
+    console.log('TEST: rn_fusebox.ts: FuseboxReactNativeApplicationObserver: constructor')
     targetManager.observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
   }
 
