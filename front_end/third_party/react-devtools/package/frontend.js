@@ -43636,6 +43636,7 @@ function DevTools_DevTools({
   hideLogAction,
   hideViewSourceAction
 }) {
+  console.log('TEST: react: react-devtools-shared: DevTools: bridge: ', bridge);
   const [currentTab, setTab] = useLocalStorage(LOCAL_STORAGE_DEFAULT_TAB_KEY, defaultTab);
   let tab = currentTab;
 
@@ -43674,6 +43675,7 @@ function DevTools_DevTools({
     canViewElementSourceFunction: canViewElementSourceFunction || null,
     viewElementSourceFunction: viewElementSourceFunction || null
   }), [canViewElementSourceFunction, viewElementSourceFunction]);
+  console.log('TEST: react: react-devtools-shared: DevTools: viewElementSource: ', viewElementSource);
   const contextMenu = (0,react.useMemo)(() => ({
     isEnabledForInspectedElement: enabledInspectedElementContextMenu,
     viewAttributeSourceFunction: viewAttributeSourceFunction || null
@@ -43753,7 +43755,7 @@ function DevTools_DevTools({
     "data-react-devtools-portal-root": true
   }, showTabBar && /*#__PURE__*/react.createElement("div", {
     className: DevTools.TabBar
-  }, /*#__PURE__*/react.createElement(ReactLogo_ReactLogo, null), /*#__PURE__*/react.createElement("span", {
+  }, /*#__PURE__*/react.createElement(ReactLogo_ReactLogo, null), /*#__PURE__*/react.createElement("div", null, "hello test?"), /*#__PURE__*/react.createElement("span", {
     className: DevTools.DevToolsVersion
   }, "5.3.1-587f03c922"), /*#__PURE__*/react.createElement("div", {
     className: DevTools.Spacer
@@ -43790,6 +43792,8 @@ function DevTools_DevTools({
 
 
 function createBridge(wall) {
+  console.log('TEST: react: react-devtools-fusebox: frontend: createBridge');
+
   if (wall != null) {
     return new bridge(wall);
   }
@@ -43800,6 +43804,7 @@ function createBridge(wall) {
   });
 }
 function createStore(bridge, config) {
+  console.log('TEST: react: react-devtools-fusebox: frontend: createStore');
   return new Store(bridge, {
     checkBridgeProtocolCompatibility: true,
     supportsTraceUpdates: true,
@@ -43816,6 +43821,7 @@ function initialize(contentWindow, options) {
     viewElementSourceFunction,
     canViewElementSourceFunction
   } = options;
+  console.log('TEST: react: react-devtools-fusebox: frontend: initialize');
   const root = (0,client.createRoot)(contentWindow);
   root.render( /*#__PURE__*/react.createElement(DevTools_DevTools, {
     bridge: bridge,
