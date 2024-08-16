@@ -20,7 +20,7 @@ const UIStrings = {
   /** @description Tech Preview label */
   techPreviewLabel: 'Tech Preview',
   /** @description Welcome text */
-  welcomeMessage: 'Welcome to debugging in React Native',
+  welcomeMessage: 'Welcome to debugging in React Native (test)',
   /** @description "Debugging docs" link */
   docsLabel: 'Debugging docs',
   /** @description "What's new" link */
