@@ -34,7 +34,7 @@ export class TestDevTool extends UI.Widget.VBox implements
   }
 
   test() {
-    if(window) {
+    if(window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
       console.log('TEST DEVTOOL: window exists:', window)
     } else {
       console.log('TEST DEVTOOL: window does not exist')
