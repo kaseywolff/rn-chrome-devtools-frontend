@@ -25,7 +25,7 @@ const UIStrings = {
 };
 
 // register this file here
-const str_ = i18n.i18n.registerUIStrings('panels/test/test_devtools-meta.ts', UIStrings);
+const str_ = i18n.i18n.registerUIStrings('panels/test/test_devtool-meta.ts', UIStrings);
 const i18nLazyString = i18n.i18n.getLazilyComputedLocalizedString.bind(undefined, str_);
 
 let loadedTestModule: (typeof TestDevToolPanel|undefined);
@@ -40,14 +40,14 @@ async function loadTestModule(): Promise<typeof TestDevToolPanel> {
 // read more about this in ./front_end/ui/legacy/README.md
 UI.ViewManager.registerViewExtension({
   location: UI.ViewManager.ViewLocationValues.PANEL,
-  id: 'test-devtools', // this MUST be in kebab case
+  id: 'test-devtool', // this MUST be in kebab case
   title: i18nLazyString(UIStrings.title),
   commandPrompt: i18nLazyString(UIStrings.command),
   persistence: UI.ViewManager.ViewPersistence.PERMANENT,
   order: 1000,
   async loadView() {
     const Module = await loadTestModule();
-    return new Module.TestDevToolView.TestDevToolViewImpl();
+    return new Module.TestDevToolView.TestDevToolView();
   },
   // you need to register this (per add_experiments.md)?
   experiment: Root.Runtime.ExperimentName.REACT_NATIVE_SPECIFIC_UI,

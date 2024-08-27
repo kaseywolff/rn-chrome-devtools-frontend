@@ -26,7 +26,6 @@ devtools_module("test") {
     "../../models/react_native:bundle",
     "../../third_party/react-devtools:bundle",
     "../../ui/legacy:bundle",
-    "../../ui/lit-html:bundle",
   ]
 }
 

@@ -13,20 +13,20 @@ import * as LitHtml from '../../ui/lit-html/lit-html.js';
 
 const UIStrings = {
   /**
-   *@description Title of the Template DevTools view
+   *@description Title of the Test DevTools view
    */
-  title: 'Test DevTool',
+  title: 'Test DevTools',
 };
-
 const {render, html} = LitHtml;
-const str_ = i18n.i18n.registerUIStrings('panels/test/TestDevToolView.ts', UIStrings);
+
+const str_ = i18n.i18n.registerUIStrings('panels/test/TestDevToolsView.ts', UIStrings);
 const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 
 
-export class TestDevToolViewImpl extends UI.Widget.VBox {
+export class TestDevToolView extends UI.Widget.VBox {
 
   constructor() {
-    super(true, true);
+    super();
 
     this.render();
   };
@@ -34,7 +34,7 @@ export class TestDevToolViewImpl extends UI.Widget.VBox {
   render(): void {
     render(html`
       <div>
-        hello test..
+        hello test?
       </div>
     `, this.contentElement)
   }
