@@ -14,6 +14,7 @@ import '../../panels/network/network-meta.js';
 import '../../panels/react_devtools/react_devtools-meta.js';
 import '../../panels/rn_welcome/rn_welcome-meta.js';
 import '../../panels/timeline/timeline-meta.js';
+import '../../panels/test/test_devtool-meta.js'
 
 import * as Host from '../../core/host/host.js';
 import * as i18n from '../../core/i18n/i18n.js';
