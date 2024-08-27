@@ -23,7 +23,12 @@ const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 
 declare global {
   interface Window {
-    __REACT_DEVTOOLS_GLOBAL_HOOK__?: any,
+    __REACT_DEVTOOLS_GLOBAL_HOOK__?: any
+  }
+}
+
+declare global {
+  interface Window {
     __TEST__?: any
   }
 }
@@ -42,15 +47,15 @@ export class TestDevTool extends UI.Widget.VBox implements
 
   test() {
     if(window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-      console.log('TEST DEVTOOL: window__REACT_DEVTOOLS_GLOBAL_HOOK__ exists:', window)
+      console.log('TEST DEVTOOL: window.__REACT_DEVTOOLS_GLOBAL_HOOK__ exists:', window)
     } else {
-      console.log('TEST DEVTOOL: window does not exist')
+      console.log('TEST DEVTOOL: window.__REACT_DEVTOOLS_GLOBAL_HOOK__ does NOT exist')
     };
 
     if(window.__TEST__) {
-      console.log('TEST DEVTOOL: window__TEST__ exists:', window)
+      console.log('TEST DEVTOOL: window.__TEST__ exists:', window)
     } else {
-      console.log('TEST DEVTOOL: window does not exist')
+      console.log('TEST DEVTOOL: window.__TEST__ does NOT exist')
     };    
   }
 
@@ -58,13 +63,13 @@ export class TestDevTool extends UI.Widget.VBox implements
   render(): void {
     render(html`
       <div>
-        hello!
+        hello..?
       </div>
     `, this.contentElement, {host: this});
   }
 
   modelAdded(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    console.log('TEST DEVTOOL: modelAdded', model)
+    console.log('TEST DEVTOOL: modelAdded')
   };
 
   modelRemoved(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
