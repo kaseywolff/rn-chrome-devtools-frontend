@@ -5,6 +5,6 @@
 declare_args() {
   devtools_visibility = [
     "//front_end/panels/react_devtools/*",
-    "//front_end/panels/test/*",
+    "//front_end/panels/test_devtool/*",
   ]
 }
