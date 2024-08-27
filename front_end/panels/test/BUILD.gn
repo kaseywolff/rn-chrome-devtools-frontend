@@ -14,7 +14,6 @@ import("../visibility.gni")
 devtools_module("test") {
   sources = [ 
     "TestDevToolView.ts", 
-    #"TestDevToolModel.ts" 
   ]
 
   # add necessary deps here (ONLY what you use)
@@ -26,6 +25,7 @@ devtools_module("test") {
     "../../models/react_native:bundle",
     "../../third_party/react-devtools:bundle",
     "../../ui/legacy:bundle",
+    "../../ui/lit-html:bundle",
   ]
 }
 
