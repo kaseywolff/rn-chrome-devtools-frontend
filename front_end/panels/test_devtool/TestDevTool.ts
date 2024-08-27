@@ -14,102 +14,38 @@ import type * as Platform from '../../core/platform/platform.js';
 import type * as Protocol from '../../generated/protocol.js';
 
 const UIStrings = {
-  /** @description Beta label */
-  betaLabel: 'Beta!!!',
-  /** @description Tech Preview label */
-  techPreviewLabel: 'Tech Preview',
-  /** @description Welcome text */
-  welcomeMessage: 'Welcome to debugging in React Native',
-  /** @description "Debugging docs" link */
-  docsLabel: 'Debugging docs',
-  /** @description "What's new" link */
-  whatsNewLabel: "What's new",
-  /** @description "Debugging Basics" title (docs item 1) */
-  docsDebuggingBasics: 'Debugging Basics',
-  /** @description "Debugging Basics" item detail */
-  docsDebuggingBasicsDetail: 'Overview of debugging tools in React Native',
-  /** @description "React DevTools" title (docs item 2 - pre-launch) */
-  docsReactDevTools: 'React DevTools',
-  /** @description "React DevTools" item detail */
-  docsReactDevToolsDetail: 'Debug React components with React DevTools',
-  /** @description "React Native DevTools" title (docs item 2 - post launch) */
-  docsRNDevTools: 'React Native DevTools',
-  /** @description "React Native DevTools" item detail */
-  docsRNDevToolsDetail: 'Explore features available in React Native DevTools',
-  /** @description "Native Debugging" title (docs item 3) */
-  docsNativeDebugging: 'Native Debugging',
-  /** @description "Native Debugging" item detail */
-  docsNativeDebuggingDetail: 'Find out more about native debugging tools',
+
 };
 const {render, html} = LitHtml;
 
 const str_ = i18n.i18n.registerUIStrings('panels/test_devtool/TestDevTool.ts', UIStrings);
 const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 
-let testDevToolInstance: TestDevTool;
-
-type RNWelcomeOptions = {
-  debuggerBrandName: () => Platform.UIString.LocalizedString,
-  showBetaLabel?: boolean,
-  showTechPreviewLabel?: boolean,
-  showDocs?: boolean
-};
 
 export class TestDevTool extends UI.Widget.VBox implements
-    SDK.TargetManager.SDKModelObserver<SDK.ReactNativeApplicationModel.ReactNativeApplicationModel> {
-  private readonly options: RNWelcomeOptions;
+  SDK.TargetManager.SDKModelObserver<SDK.ReactNativeApplicationModel.ReactNativeApplicationModel> {
 
-  #reactNativeVersion: string|undefined;
-
-  static instance(options: RNWelcomeOptions): TestDevTool {
-    if (!testDevToolInstance) {
-      testDevToolInstance = new TestDevTool(options);
-    }
-    return testDevToolInstance;
-  }
-
-  private constructor(options: RNWelcomeOptions) {
+  constructor() {
     super(true, true);
-
-    this.options = options;
-
-    SDK.TargetManager.TargetManager.instance().observeModels(
-        SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
-  }
-
-  override wasShown(): void {
-    super.wasShown();
     this.render();
-    UI.InspectorView.InspectorView.instance().showDrawer({focus: true, hasTargetDrawer: false});
+
+    SDK.TargetManager.TargetManager.instance().observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
   }
 
-  modelAdded(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    model.ensureEnabled();
-    model.addEventListener(
-        SDK.ReactNativeApplicationModel.Events.MetadataUpdated, this.#handleMetadataUpdated, this);
-    this.#reactNativeVersion = model.metadataCached?.reactNativeVersion;
-  }
-
-  modelRemoved(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    model.removeEventListener(
-        SDK.ReactNativeApplicationModel.Events.MetadataUpdated, this.#handleMetadataUpdated, this);
-  }
-
-  #handleMetadataUpdated(
-      event: Common.EventTarget.EventTargetEvent<Protocol.ReactNativeApplication.MetadataUpdatedEvent>): void {
-    this.#reactNativeVersion = event.data.reactNativeVersion;
-
-    if (this.isShowing()) {
-      this.render();
-    }
-  }
 
   render(): void {
-
     render(html`
       <div>
-        hi test
+        hello world
       </div>
     `, this.contentElement, {host: this});
   }
+
+  modelAdded(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
+    console.log('TEST DEVTOOL: modelAdded', model)
+  };
+
+  modelRemoved(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
+    console.log('TEST DEVTOOL: modelRemoved')
+  };
 }

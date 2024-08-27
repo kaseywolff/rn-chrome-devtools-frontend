@@ -42,15 +42,11 @@ UI.ViewManager.registerViewExtension({
   id: 'test-devtool',
   title: i18nLazyString(UIStrings.title),
   commandPrompt: i18nLazyString(UIStrings.showTestDevTool),
-  order: -10,
+  order: 1000,
   persistence: UI.ViewManager.ViewPersistence.PERMANENT,
   async loadView() {
     const TestDevTool = await loadTestDevToolModule();
-    return TestDevTool.TestDevTool.TestDevTool.instance({
-      debuggerBrandName: i18nLazyString(UIStrings.debuggerBrandName),
-      showBetaLabel: false,
-      showDocs: true,
-    });
+    return new TestDevTool.TestDevTool.TestDevTool();
   },
   experiment: Root.Runtime.ExperimentName.REACT_NATIVE_SPECIFIC_UI,
 });
