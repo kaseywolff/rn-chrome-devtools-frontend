@@ -26,7 +26,7 @@ const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 export class TestDevToolViewImpl extends UI.Widget.VBox {
 
   constructor() {
-    super();
+    super(true, true);
 
     this.render();
   };
@@ -34,9 +34,9 @@ export class TestDevToolViewImpl extends UI.Widget.VBox {
   render(): void {
     render(html`
       <div>
-        hello test
+        hello test..
       </div>
-    `, this.contentElement, {host: this})
+    `, this.contentElement)
   }
 
 };
