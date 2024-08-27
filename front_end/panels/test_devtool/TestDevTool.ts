@@ -58,7 +58,7 @@ export class TestDevTool extends UI.Widget.VBox implements
   render(): void {
     render(html`
       <div>
-        hello
+        hello!
       </div>
     `, this.contentElement, {host: this});
   }
