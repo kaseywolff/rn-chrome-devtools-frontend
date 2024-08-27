@@ -21,6 +21,12 @@ const {render, html} = LitHtml;
 const str_ = i18n.i18n.registerUIStrings('panels/test_devtool/TestDevTool.ts', UIStrings);
 const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 
+declare global {
+  interface Window {
+    __REACT_DEVTOOLS_GLOBAL_HOOK__?: any
+  }
+}
+
 
 export class TestDevTool extends UI.Widget.VBox implements
   SDK.TargetManager.SDKModelObserver<SDK.ReactNativeApplicationModel.ReactNativeApplicationModel> {
