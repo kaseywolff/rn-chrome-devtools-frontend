@@ -23,17 +23,19 @@ const str_ = i18n.i18n.registerUIStrings('panels/test/TestDevToolView.ts', UIStr
 const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 
 
-export class TestDevToolViewImpl extends UI.View.SimpleView {
+export class TestDevToolViewImpl extends UI.Widget.VBox {
 
   constructor() {
-    super(i18nString(UIStrings.title));
+    super();
 
     this.render();
   };
 
   render(): void {
     render(html`
-      <div>hello test</div>
+      <div>
+        hello test
+      </div>
     `, this.contentElement, {host: this})
   }
 
