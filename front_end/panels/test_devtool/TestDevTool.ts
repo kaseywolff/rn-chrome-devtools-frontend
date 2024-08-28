@@ -21,42 +21,30 @@ const {render, html} = LitHtml;
 const str_ = i18n.i18n.registerUIStrings('panels/test_devtool/TestDevTool.ts', UIStrings);
 const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 
-declare global {
-  interface Window {
-    __REACT_DEVTOOLS_GLOBAL_HOOK__?: any
-  }
-}
-
-declare global {
-  interface Window {
-    __TEST__?: any
-  }
-}
 
 export class TestDevTool extends UI.Widget.VBox implements
   SDK.TargetManager.SDKModelObserver<SDK.ReactNativeApplicationModel.ReactNativeApplicationModel> {
 
+  private socket: WebSocket;
+
   constructor() {
     super(true, true);
+    this.socket = new WebSocket('ws://localhost:8082');
+    this.socket.onmessage = this.onMessageReceived.bind(this);
     this.render();
 
     SDK.TargetManager.TargetManager.instance().observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
+  }
 
-    // Add code to receive message from RN app
-    if (window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
-      window.__REACT_DEVTOOLS_GLOBAL_HOOK__.on('customMessage', (message: any) => {
-        console.log('TEST DEVTOOL: message received:', message);
-      });
-      console.log('TEST DEVTOOL: window.__REACT_DEVTOOLS_GLOBAL_HOOK__ exists:', window);
-    } else {
-      console.log('TEST DEVTOOL: window.__REACT_DEVTOOLS_GLOBAL_HOOK__ does NOT exist');
-    }
+  private onMessageReceived(event: MessageEvent): void {
+    const message = event.data;
+    console.log('TEST DEVTOOL: message received:', message);
   }
 
   render(): void {
     render(html`
       <div>
-        hello.
+        hello.?
       </div>
     `, this.contentElement, {host: this});
   }
@@ -69,3 +57,4 @@ export class TestDevTool extends UI.Widget.VBox implements
     console.log('TEST DEVTOOL: modelRemoved');
   }
 }
+
