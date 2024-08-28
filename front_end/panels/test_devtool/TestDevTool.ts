@@ -31,11 +31,22 @@ export class TestDevTool extends UI.Widget.VBox implements
 
     SDK.TargetManager.TargetManager.instance().observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
 
-    // Connect to the WebSocket server
-    const ws = new WebSocket('ws://localhost:8080/test');
+    // Connect to the Metro WebSocket server
+    const ws = new WebSocket('ws://localhost:8081');
     ws.onmessage = (event) => {
-      console.log('TEST DEVTOOL: ws.onmessage: event', event)
       this.onMessageReceived(event.data);
+    };
+
+    ws.onopen = () => {
+      console.log('TEST DEVTOOL: WebSocket connection opened');
+    };
+
+    ws.onerror = (error) => {
+      console.error('TEST DEVTOOL: WebSocket error', error);
+    };
+
+    ws.onclose = () => {
+      console.log('TEST DEVTOOL: WebSocket connection closed');
     };
   }
 
@@ -52,10 +63,10 @@ export class TestDevTool extends UI.Widget.VBox implements
   }
 
   modelAdded(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    // console.log('TEST DEVTOOL: modelAdded')
+    console.log('TEST DEVTOOL: modelAdded')
   };
 
   modelRemoved(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    // console.log('TEST DEVTOOL: modelRemoved')
+    console.log('TEST DEVTOOL: modelRemoved')
   };
 }
