@@ -31,12 +31,16 @@ export class TestDevTool extends UI.Widget.VBox implements
 
     SDK.TargetManager.TargetManager.instance().observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
 
-    // Listen for messages from the React Native app
-    Common.EventTarget.fireEvent('messageFromRNApp', this.onMessageReceived.bind(this));
+    // Connect to the WebSocket server
+    const ws = new WebSocket('ws://localhost:8080/test');
+    ws.onmessage = (event) => {
+      console.log('TEST DEVTOOL: ws.onmessage: event', event)
+      this.onMessageReceived(event.data);
+    };
   }
 
-  onMessageReceived(event: { data: string }) {
-    console.log('TEST DEVTOOL: message received:', event.data);
+  onMessageReceived(message: string) {
+    console.log('TEST DEVTOOL: message received:', message);
   }
 
   render(): void {
@@ -48,10 +52,10 @@ export class TestDevTool extends UI.Widget.VBox implements
   }
 
   modelAdded(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    console.log('TEST DEVTOOL: modelAdded')
+    // console.log('TEST DEVTOOL: modelAdded')
   };
 
   modelRemoved(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    console.log('TEST DEVTOOL: modelRemoved')
+    // console.log('TEST DEVTOOL: modelRemoved')
   };
 }
