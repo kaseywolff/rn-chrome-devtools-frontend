@@ -31,8 +31,8 @@ export class TestDevTool extends UI.Widget.VBox implements
 
     SDK.TargetManager.TargetManager.instance().observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
 
-    // Connect to the Metro WebSocket server
-    const ws = new WebSocket('ws://localhost:8081');
+    // Connect to the custom WebSocket server
+    const ws = new WebSocket('ws://localhost:8081/test');
     ws.onmessage = (event) => {
       this.onMessageReceived(event.data);
     };
@@ -57,7 +57,7 @@ export class TestDevTool extends UI.Widget.VBox implements
   render(): void {
     render(html`
       <div>
-        hello.....
+        hello
       </div>
     `, this.contentElement, {host: this});
   }
