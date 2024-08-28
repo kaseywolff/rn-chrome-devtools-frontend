@@ -18,6 +18,7 @@ export class TestDevTool extends UI.Widget.VBox implements
   }
 
   setupWebSocket() {
+    console.log('TEST DEVTOOL: setupWebSocket')
     const socket = new WebSocket('ws://localhost:8081/debugger-frontend/test');
     socket.onmessage = (event) => {
       console.log('Message from React Native app:', event.data);
@@ -27,7 +28,7 @@ export class TestDevTool extends UI.Widget.VBox implements
   render(): void {
     render(html`
       <div>
-        hello test..
+        hello.
       </div>
     `, this.contentElement, { host: this });
   }
