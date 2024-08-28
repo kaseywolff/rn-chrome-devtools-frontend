@@ -3,7 +3,7 @@
 // Use of this source code is governed by a BSD-style license that can be
 // found in the LICENSE file.
 
-import type * as Common from '../../core/common/common.js';
+import * as Common from '../../core/common/common.js';
 import * as UI from '../../ui/legacy/legacy.js';
 import * as Host from '../../core/host/host.js';
 import * as i18n from '../../core/i18n/i18n.js';
@@ -25,36 +25,33 @@ const i18nString = i18n.i18n.getLocalizedString.bind(undefined, str_);
 export class TestDevTool extends UI.Widget.VBox implements
   SDK.TargetManager.SDKModelObserver<SDK.ReactNativeApplicationModel.ReactNativeApplicationModel> {
 
-  private socket: WebSocket;
-
   constructor() {
     super(true, true);
-    this.socket = new WebSocket('ws://localhost:8082');
-    this.socket.onmessage = this.onMessageReceived.bind(this);
     this.render();
 
     SDK.TargetManager.TargetManager.instance().observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
+
+    // Listen for messages from the React Native app
+    Common.EventTarget.fireEvent('messageFromRNApp', this.onMessageReceived.bind(this));
   }
 
-  private onMessageReceived(event: MessageEvent): void {
-    const message = event.data;
-    console.log('TEST DEVTOOL: message received:', message);
+  onMessageReceived(event: { data: string }) {
+    console.log('TEST DEVTOOL: message received:', event.data);
   }
 
   render(): void {
     render(html`
       <div>
-        hello.?
+        hello.....
       </div>
     `, this.contentElement, {host: this});
   }
 
   modelAdded(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    console.log('TEST DEVTOOL: modelAdded');
-  }
+    console.log('TEST DEVTOOL: modelAdded')
+  };
 
   modelRemoved(model: SDK.ReactNativeApplicationModel.ReactNativeApplicationModel): void {
-    console.log('TEST DEVTOOL: modelRemoved');
-  }
+    console.log('TEST DEVTOOL: modelRemoved')
+  };
 }
-
