@@ -40,23 +40,17 @@ export class TestDevTool extends UI.Widget.VBox implements
   constructor() {
     super(true, true);
     this.render();
-    this.test();
 
     SDK.TargetManager.TargetManager.instance().observeModels(SDK.ReactNativeApplicationModel.ReactNativeApplicationModel, this);
-  }
-
-  test() {
+    
     if(window.__REACT_DEVTOOLS_GLOBAL_HOOK__) {
+      window.__REACT_DEVTOOLS_GLOBAL_HOOK__.on('customMessage', (message: any) => {
+        console.log('TEST DEVTOOL: message received', message)
+      })
       console.log('TEST DEVTOOL: window.__REACT_DEVTOOLS_GLOBAL_HOOK__ exists:', window)
     } else {
       console.log('TEST DEVTOOL: window.__REACT_DEVTOOLS_GLOBAL_HOOK__ does NOT exist')
     };
-
-    if(window.__TEST__) {
-      console.log('TEST DEVTOOL: window.__TEST__ exists:', window)
-    } else {
-      console.log('TEST DEVTOOL: window.__TEST__ does NOT exist')
-    };    
   }
 
 
